@@ -1,5 +1,5 @@
 {
-  "name": "alexo/laravel-payu",
+  "name": "aosand/laravel-payu",
   "description": "Una interfaz fluida para Laravel usando el SDK oficial de PayU latam.",
   "keywords": ["laravel", "payu", "pagos"],
   "license": "MIT",
@@ -7,7 +7,12 @@
     {
       "name": "Alejandro Gutiérrez",
       "email": "alejandrogutierrezacosta@gmail.com"
+    },
+    {
+      "name": "Ariel Sand",
+      "email": "ariel.sand@gmail.com"
     }
+
   ],
   "require": {
     "php": ">=5.5.9",
