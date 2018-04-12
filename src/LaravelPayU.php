@@ -321,6 +321,8 @@ class LaravelPayU
      */
     public static function doPing($onSuccess, $onError)
     {
+        static::setPayUEnvironment();
+
         try {
             $response = \PayUPayments::doPing();
             if ($response) {
@@ -348,6 +350,60 @@ class LaravelPayU
 
             if ($array) {
                 $onSuccess($array->banks);
+            }
+        } catch (\PayUException $exc) {
+            $onError($exc);
+        } catch (ConnectionException $exc) {
+            $onError($exc);
+        } catch (RuntimeException $exc) {
+            $onError($exc);
+        } catch (InvalidArgumentException $exc) {
+            $onError($exc);
+        }
+    }
+
+    /**
+     * Get array of available Payment Method.
+     *
+     * @return array
+     */
+    public static function getPaymentMethod($onSuccess, $onError)
+    {
+        static::setPayUEnvironment();
+
+        try {
+
+            $array = \PayUPayments::getPaymentMethods();
+
+            if ($array) {
+                $onSuccess(collect($array->paymentMethods));
+            }
+        } catch (\PayUException $exc) {
+            $onError($exc);
+        } catch (ConnectionException $exc) {
+            $onError($exc);
+        } catch (RuntimeException $exc) {
+            $onError($exc);
+        } catch (InvalidArgumentException $exc) {
+            $onError($exc);
+        }
+    }
+
+    /**
+     * Get array of available Payment Method.
+     *
+     * @return array
+     */
+    public static function getPaymentMethodAvailability($method, $onSuccess, $onError)
+    {
+        static::setPayUEnvironment();
+
+        try {
+
+            $array = \PayUPayments::getPaymentMethodAvailability($method);
+
+            if ($array) {
+                $onSuccess(collect($array->paymentMethod));
             }
         } catch (\PayUException $exc) {
             $onError($exc);
